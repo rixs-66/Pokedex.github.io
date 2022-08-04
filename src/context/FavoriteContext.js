@@ -7,4 +7,5 @@ updateFavoritePokemon: (id) => null
 });
 
 export const FavoriteProvider = FavoriteContext.Provider;
+
 export default FavoriteContext;
