@@ -1,8 +1,18 @@
 import React from 'react'
+import FavoriteContext from '../context/FavoriteContext'
+
+
+const {useContext} = React;
+
 
 
 
 export default function Navbar() {
+
+  const {favoritePokemons} = useContext(FavoriteContext)
+
+  console.log(favoritePokemons);
+
   return (
     <nav>
       <div />
@@ -12,7 +22,7 @@ export default function Navbar() {
           className='nav-img' />
       </div>
 
-      <div>✌️</div>
+      <div className='favorite'>💛 {favoritePokemons.length}</div>
     </nav>
   )
 }

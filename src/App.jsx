@@ -4,6 +4,9 @@ import './App.css'
 import Pokedex from "./components/Pokedex";
 import { useState, useEffect } from "react";
 import { getPokemonData, getPokemons } from "./functions/Api";
+import { FavoriteProvider } from "./context/FavoriteContext";
+
+
 
 
 
@@ -12,7 +15,9 @@ function App() {
   const [pokemons, setPokemons] = useState([]);
   const [page, setPage] = useState(0);
   const [total, setTotal] = useState();
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
+  const [favorites, setFavorites] = useState(["raichu"]);
+
 
   const fetchPokemons = async () => {
     try {
@@ -35,8 +40,18 @@ function App() {
 
   }, [page])
 
+  const updateFavoritePokemon = (name) => {
+
+    console.log(name);
+
+  }
+
   return (
-    <>
+
+    <FavoriteProvider value={{
+      favoritePokemons: favorites,
+      updateFavoritePokemon: updateFavoritePokemon
+    }}>
       <Navbar />
       <Searchbar />
       {loading ? <div className="loading">
@@ -51,12 +66,13 @@ function App() {
         </div>
       </div> :
         <Pokedex pokemons={pokemons}
-          page= {page}
-          setPage = {setPage}
-          total= {total} />
+          page={page}
+          setPage={setPage}
+          total={total} />
       }
 
-    </>
+    </FavoriteProvider>
+
   );
 }
 

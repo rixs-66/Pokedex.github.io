@@ -1,9 +1,12 @@
 import { type } from '@testing-library/user-event/dist/type';
-import React from 'react'
+import React, { useContext } from 'react'
+import FavoriteContext from '../context/FavoriteContext';
 
 export default function Cardpokemon(props) {
     const { pokemon } = props;
+    const {favoritePokemons} = useContext(FavoriteContext);
 
+    const heart = favoritePokemons.includes(pokemon.name) ? "❤️" : "🖤";
     return (
         <div className='card-pokemon'>
 
@@ -23,7 +26,7 @@ export default function Cardpokemon(props) {
                             </div>
                         )
                     })}</div>
-                    <div className='favorite'>❤️</div>
+                    <div className='favorite'>{heart}</div>
                 </div>
             </div>
         </div>
